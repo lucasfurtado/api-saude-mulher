@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
-import { OlaController } from './ola/ola.controller';
-import { OlaService } from './ola/ola.service';
+import { OlaModule } from './ola/ola.module';
 
 @Module({
-  imports: [],
-  controllers: [OlaController],
-  providers: [OlaService],
+    imports:[OlaModule]
 })
 export class AppModule {}
