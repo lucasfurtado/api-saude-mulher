@@ -1,3 +1,4 @@
+import { UsuarioModule } from './usuario/usuario.module';
 import { Module } from '@nestjs/common';
 import { OlaModule } from './ola/ola.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
     imports:[
         OlaModule,
+        UsuarioModule,
         ConfigModule.forRoot({
             isGlobal: true,
         }),
