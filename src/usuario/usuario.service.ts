@@ -22,6 +22,7 @@ export class UsuarioService{
     async salvarUsuario(usuario: CriaUsuarioDTO) {
         const novoUsuario = new UsuarioEntity;
         novoUsuario.nome = usuario.nome;
+        novoUsuario.cpf = usuario.cpf;
         novoUsuario.email = usuario.email;
         novoUsuario.senha = usuario.senha;
 
