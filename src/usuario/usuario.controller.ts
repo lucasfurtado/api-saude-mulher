@@ -28,4 +28,8 @@ export class UsuarioController {
         await this.usuarioService.editarUsuario(id, editaUsuario);
     }
 
+    @Get('/:email')
+    async procuraUsuarioComEmail(@Param('email') email: string){
+        return await this.usuarioService.existeComEmail(email);
+    }
 }

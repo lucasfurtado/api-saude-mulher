@@ -41,4 +41,12 @@ export class UsuarioService{
         
         return await this.usuarioRepository.update(id, editaUsuario);
     }
+
+    async existeComEmail(email: string){
+        const possivelUsuario = await this.usuarioRepository.findOne({
+            where: { email },
+        });
+        console.log(possivelUsuario);
+        return possivelUsuario;
+    }
 }
