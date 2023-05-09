@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfigService } from './config/database.config.service';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from './auth/auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
     imports:[
@@ -18,6 +20,6 @@ import { AuthModule } from './auth/auth.module';
             useClass: DatabaseConfigService,
             inject: [DatabaseConfigService]
         }),
-    ]
+    ],
 })
 export class AppModule {}
