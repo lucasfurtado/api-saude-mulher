@@ -6,6 +6,4 @@ import { OlaService } from "./ola.service";
     controllers: [OlaController],
     providers: [OlaService],
 })
-export class OlaModule{
-
-}
+export class OlaModule {}

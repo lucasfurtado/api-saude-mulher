@@ -12,6 +12,4 @@ import { CpfIsUnicoValidator } from "./validacoes/cpfIsUnico.validator";
     providers: [UsuarioService, EmailIsUnicoValidator, CpfIsUnicoValidator],
     exports: [UsuarioService]
 })
-export class UsuarioModule {
-
-}
+export class UsuarioModule {}
