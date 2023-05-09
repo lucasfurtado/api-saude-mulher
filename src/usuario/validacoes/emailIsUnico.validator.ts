@@ -10,7 +10,6 @@ export class EmailIsUnicoValidator implements ValidatorConstraintInterface{
 
     async validate(value: any, validationArguments?: ValidationArguments): Promise<boolean> {
         const usuarioComEmail = await this.usuarioService.existeComEmail(value);
-        console.log(usuarioComEmail)
         return !(usuarioComEmail !== null);
     }
 

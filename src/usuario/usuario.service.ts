@@ -46,7 +46,13 @@ export class UsuarioService{
         const possivelUsuario = await this.usuarioRepository.findOne({
             where: { email },
         });
-        console.log(possivelUsuario);
+        return possivelUsuario;
+    }
+
+    async existeComCpf(cpf: string){
+        const possivelUsuario = await this.usuarioRepository.findOne({
+            where: { cpf },
+        });
         return possivelUsuario;
     }
 }
