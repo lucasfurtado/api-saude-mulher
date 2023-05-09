@@ -15,12 +15,12 @@ export class UsuarioService{
     async login(email: string, senha: string){
         const usuario = await this.existeComEmail(email);
         if(!usuario){
-            throw new UnauthorizedException('Email ou senha inválidos, cheque as credenciais.');
+            throw new UnauthorizedException('Email e/ou senha inválidos, cheque as credenciais');
         }
         
         const senhaCombina = await bcrypt.compare(senha, usuario.senha);
         if(!senhaCombina){
-            throw new UnauthorizedException('Email inválidos, cheque as credenciais.');
+            throw new UnauthorizedException('Email e/ou senha inválidos, cheque as credenciais');
         }
 
         return 'Logado!';

@@ -5,6 +5,6 @@ export class LoginDTO{
     @IsEmail(undefined, {message: 'Digite um email valido'})
     email: string;
 
-    @IsNotEmpty()
+    @IsNotEmpty({message: 'Digite uma senha'})
     senha: string;
 }
