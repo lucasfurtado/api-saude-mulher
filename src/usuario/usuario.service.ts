@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { UsuarioEntity } from "./usuario.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
@@ -10,8 +10,21 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UsuarioService{
 
-    constructor(
-        @InjectRepository(UsuarioEntity) private readonly usuarioRepository: Repository<UsuarioEntity>) {}
+    constructor(@InjectRepository(UsuarioEntity) private readonly usuarioRepository: Repository<UsuarioEntity>) {}
+
+    async login(email: string, senha: string){
+        const usuario = await this.existeComEmail(email);
+        if(!usuario){
+            throw new UnauthorizedException('Email ou senha inválidos, cheque as credenciais.');
+        }
+        
+        const senhaCombina = await bcrypt.compare(senha, usuario.senha);
+        if(!senhaCombina){
+            throw new UnauthorizedException('Email inválidos, cheque as credenciais.');
+        }
+
+        return 'Logado!';
+    }
 
     async listaUsuarios() {
         const usuariosSalvos = await this.usuarioRepository.find();
