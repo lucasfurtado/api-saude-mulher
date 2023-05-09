@@ -9,7 +9,8 @@ import { CpfIsUnicoValidator } from "./validacoes/cpfIsUnico.validator";
 @Module({
     imports: [TypeOrmModule.forFeature([UsuarioEntity])],
     controllers: [UsuarioController],
-    providers: [UsuarioService, EmailIsUnicoValidator, CpfIsUnicoValidator]
+    providers: [UsuarioService, EmailIsUnicoValidator, CpfIsUnicoValidator],
+    exports: [UsuarioService]
 })
 export class UsuarioModule {
 
