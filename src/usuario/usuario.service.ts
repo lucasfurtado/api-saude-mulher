@@ -21,15 +21,11 @@ export class UsuarioService{
     }
 
     async salvarUsuario(usuario: CriaUsuarioDTO) {
-
-        const saltRounds = 10;
-        const senhaHash = await bcrypt.hash(usuario.senha, saltRounds);
-
         const novoUsuario = new UsuarioEntity;
         novoUsuario.nome = usuario.nome;
         novoUsuario.cpf = usuario.cpf;
         novoUsuario.email = usuario.email;
-        novoUsuario.senha = senhaHash;
+        novoUsuario.senha = await this.encriptografarSenha(usuario.senha);
 
         return await this.usuarioRepository.save(novoUsuario);
     }
@@ -42,7 +38,7 @@ export class UsuarioService{
         const editaUsuario = new UsuarioEntity;
         editaUsuario.nome = editarUsuario.nome;
         editaUsuario.email = editarUsuario.email;
-        editaUsuario.senha = editarUsuario.senha;
+        editaUsuario.senha = await this.encriptografarSenha(editaUsuario.senha);
         
         return await this.usuarioRepository.update(id, editaUsuario);
     }
@@ -59,5 +55,10 @@ export class UsuarioService{
             where: { cpf },
         });
         return possivelUsuario;
+    }
+
+    private async encriptografarSenha(senha: string) : Promise<string>{
+        const saltRounds = 10;
+        return await bcrypt.hash(senha, saltRounds);
     }
 }
