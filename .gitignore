@@ -33,3 +33,9 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# ignore env file
+.env
+
+# ignorar secret do token
+/src/auth/secret.ts
