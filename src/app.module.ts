@@ -7,12 +7,14 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
+import { TipoUsuarioModule } from './tipoUsuario/tipoUsuario.module';
 
 @Module({
     imports:[
         OlaModule,
         UsuarioModule,
         AuthModule,
+        TipoUsuarioModule,
         ConfigModule.forRoot({
             isGlobal: true,
         }),
