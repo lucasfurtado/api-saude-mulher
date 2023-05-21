@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { UsuarioEntity } from "./usuario.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
@@ -30,6 +30,9 @@ export class UsuarioService{
         novoUsuario.tipoUsuario = await this.tipoUsuarioRepository.findOne(
             {where: { id: usuario.tipoUsuario}}
         );
+        if(novoUsuario.tipoUsuario === null){
+            throw new BadRequestException('Não existe esse tipo de usuário');
+        }
         novoUsuario.senha = await this.encriptografarSenha(usuario.senha);
 
         return await this.usuarioRepository.save(novoUsuario);
