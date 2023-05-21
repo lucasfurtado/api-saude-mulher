@@ -13,9 +13,6 @@ export class UsuarioEntity{
     @Column({name: 'cpf', length: 50, nullable: false})
     cpf: string;
 
-    @Column({name: 'cartaoSus', length: 50})
-    cartaoSus: string;
-
     @Column({name: 'email', length: 50, nullable: false})
     email: string;
 
