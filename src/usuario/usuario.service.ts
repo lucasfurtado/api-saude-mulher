@@ -6,11 +6,14 @@ import { CriaUsuarioDTO } from "./dto/criaUsuario.dto";
 import { EditaUsuarioDTO } from "./dto/editaUsuario.dto";
 import { ListaUsuariosDTO } from "./dto/listaUsuarios.dto";
 import * as bcrypt from 'bcrypt';
+import { TipoUsuarioEntity } from "src/tipoUsuario/tipoUsuario.entity";
 
 @Injectable()
 export class UsuarioService{
 
-    constructor(@InjectRepository(UsuarioEntity) private readonly usuarioRepository: Repository<UsuarioEntity>) {}
+    constructor(
+        @InjectRepository(UsuarioEntity) private readonly usuarioRepository: Repository<UsuarioEntity>,
+        @InjectRepository(TipoUsuarioEntity) private readonly tipoUsuarioRepository: Repository<TipoUsuarioEntity>) {}
 
     async listaUsuarios() {
         const usuariosSalvos = await this.usuarioRepository.find();
@@ -24,6 +27,9 @@ export class UsuarioService{
         novoUsuario.nome = usuario.nome;
         novoUsuario.cpf = usuario.cpf;
         novoUsuario.email = usuario.email;
+        novoUsuario.tipoUsuario = await this.tipoUsuarioRepository.findOne(
+            {where: { id: usuario.tipoUsuario}}
+        );
         novoUsuario.senha = await this.encriptografarSenha(usuario.senha);
 
         return await this.usuarioRepository.save(novoUsuario);

@@ -19,4 +19,7 @@ export class CriaUsuarioDTO{
 
     @MinLength(6, { message: 'A senha precisa ter pelo menos 6 caracteres'})
     senha: string;
+
+    @IsNotEmpty({message: 'Seleciona o tipo de usuário'})
+    tipoUsuario: number;
 }
