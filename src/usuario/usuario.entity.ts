@@ -1,5 +1,5 @@
 import { TipoUsuarioEntity } from "src/tipoUsuario/tipoUsuario.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'usuarios' })
 export class UsuarioEntity{
@@ -28,7 +28,6 @@ export class UsuarioEntity{
     @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt: string;
 
-    @OneToOne(() => TipoUsuarioEntity)
-    @JoinColumn({ name: 'tipo_usuario_id' })
+    @ManyToOne(() => TipoUsuarioEntity, tipoUsuario => tipoUsuario.usuarios)
     tipoUsuario: TipoUsuarioEntity;
 }
