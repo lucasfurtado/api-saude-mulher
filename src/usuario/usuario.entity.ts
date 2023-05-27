@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { TipoUsuarioEntity } from "src/tipoUsuario/tipoUsuario.entity";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'usuarios' })
 export class UsuarioEntity{
@@ -11,9 +12,6 @@ export class UsuarioEntity{
 
     @Column({name: 'cpf', length: 50, nullable: false})
     cpf: string;
-
-    @Column({name: 'cartaoSus', length: 50})
-    cartaoSus: string;
 
     @Column({name: 'email', length: 50, nullable: false})
     email: string;
@@ -29,4 +27,7 @@ export class UsuarioEntity{
 
     @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt: string;
+
+    @ManyToOne(() => TipoUsuarioEntity, tipoUsuario => tipoUsuario.usuarios, { eager: true })
+    tipoUsuario: TipoUsuarioEntity;
 }

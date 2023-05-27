@@ -1,29 +1,35 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { UsuarioEntity } from "./usuario.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { CriaUsuarioDTO } from "./dto/criaUsuario.dto";
+import { CriaAdminDTO } from "./dto/criaAdministrador.dto";
 import { EditaUsuarioDTO } from "./dto/editaUsuario.dto";
-import { ListaUsuariosDTO } from "./dto/listaUsuarios.dto";
+import { UsuariosDTO } from "./dto/usuarios.dto";
 import * as bcrypt from 'bcrypt';
+import { TipoUsuarioEntity } from "src/tipoUsuario/tipoUsuario.entity";
 
 @Injectable()
 export class UsuarioService{
 
-    constructor(@InjectRepository(UsuarioEntity) private readonly usuarioRepository: Repository<UsuarioEntity>) {}
+    constructor(
+        @InjectRepository(UsuarioEntity) private readonly usuarioRepository: Repository<UsuarioEntity>,
+        @InjectRepository(TipoUsuarioEntity) private readonly tipoUsuarioRepository: Repository<TipoUsuarioEntity>) {}
 
     async listaUsuarios() {
         const usuariosSalvos = await this.usuarioRepository.find();
         return usuariosSalvos.map(
-            (usuario) => new ListaUsuariosDTO(usuario.nome,usuario.email)
+            (usuario) => new UsuariosDTO(usuario.nome,usuario.email,usuario.tipoUsuario.tipo)
         )
     }
 
-    async salvarUsuario(usuario: CriaUsuarioDTO) {
+    async salvarUsuario(usuario: CriaAdminDTO) {
         const novoUsuario = new UsuarioEntity;
         novoUsuario.nome = usuario.nome;
         novoUsuario.cpf = usuario.cpf;
         novoUsuario.email = usuario.email;
+        novoUsuario.tipoUsuario = await this.tipoUsuarioRepository.findOne(
+            {where: { id: usuario.tipoUsuario}}
+        );
         novoUsuario.senha = await this.encriptografarSenha(usuario.senha);
 
         return await this.usuarioRepository.save(novoUsuario);

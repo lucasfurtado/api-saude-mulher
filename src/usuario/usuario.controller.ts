@@ -1,7 +1,8 @@
-import { CriaUsuarioDTO } from './dto/criaUsuario.dto';
+import { CriaAdminDTO } from './dto/criaAdministrador.dto';
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { UsuarioService } from "./usuario.service";
 import { EditaUsuarioDTO } from './dto/editaUsuario.dto';
+import { CriaPacienteDTO } from './dto/criaPaciente.dto';
 
 @Controller('/usuarios')
 export class UsuarioController {
@@ -13,9 +14,14 @@ export class UsuarioController {
         return await this.usuarioService.listaUsuarios();
     }
 
-    @Post()
-    async salvarUsuario(@Body() criaUsuario: CriaUsuarioDTO){
-        await this.usuarioService.salvarUsuario(criaUsuario);
+    @Post('/admin')
+    async criarAdmin(@Body() adm: CriaAdminDTO){
+        await this.usuarioService.salvarUsuario(adm);
+    }
+
+    @Post('/paciente')
+    async criarPaciente(@Body() paciente: CriaPacienteDTO){
+        await this.usuarioService.salvarUsuario(paciente);
     }
 
     @Delete('/:id')

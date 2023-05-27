@@ -1,8 +1,13 @@
 import { IsEmail, IsNotEmpty, MaxLength, MinLength } from "class-validator";
 import { EmailIsUnico } from "../validacoes/emailIsUnico.validator";
 import { CpfIsUnico } from "../validacoes/cpfIsUnico.validator";
+import ETipoUsuario from "src/helper/Enums/ETipoUsuario";
 
-export class CriaUsuarioDTO{
+export class CriaPacienteDTO{
+
+    constructor(){
+        this.tipoUsuario = ETipoUsuario.Paciente
+    }
 
     @IsNotEmpty({message: 'O nome não pode ser vazio'})
     nome: string;
@@ -19,4 +24,7 @@ export class CriaUsuarioDTO{
 
     @MinLength(6, { message: 'A senha precisa ter pelo menos 6 caracteres'})
     senha: string;
+
+    @IsNotEmpty({message: 'Seleciona o tipo de usuário'})
+    tipoUsuario: number;
 }
