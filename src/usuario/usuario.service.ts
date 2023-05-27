@@ -22,7 +22,7 @@ export class UsuarioService{
         )
     }
 
-    async salvarAdministrador(usuario: CriaAdminDTO) {
+    async salvarUsuario(usuario: CriaAdminDTO) {
         const novoUsuario = new UsuarioEntity;
         novoUsuario.nome = usuario.nome;
         novoUsuario.cpf = usuario.cpf;
