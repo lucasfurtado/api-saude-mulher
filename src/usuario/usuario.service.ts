@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { UsuarioEntity } from "./usuario.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { CriaUsuarioDTO } from "./dto/criaUsuario.dto";
+import { CriaAdminDTO } from "./dto/criaAdministrador.dto";
 import { EditaUsuarioDTO } from "./dto/editaUsuario.dto";
 import { ListaUsuariosDTO } from "./dto/listaUsuarios.dto";
 import * as bcrypt from 'bcrypt';
@@ -22,7 +22,7 @@ export class UsuarioService{
         )
     }
 
-    async salvarUsuario(usuario: CriaUsuarioDTO) {
+    async salvarAdministrador(usuario: CriaAdminDTO) {
         const novoUsuario = new UsuarioEntity;
         novoUsuario.nome = usuario.nome;
         novoUsuario.cpf = usuario.cpf;
@@ -30,9 +30,6 @@ export class UsuarioService{
         novoUsuario.tipoUsuario = await this.tipoUsuarioRepository.findOne(
             {where: { id: usuario.tipoUsuario}}
         );
-        if(novoUsuario.tipoUsuario === null){
-            throw new BadRequestException('Não existe esse tipo de usuário');
-        }
         novoUsuario.senha = await this.encriptografarSenha(usuario.senha);
 
         return await this.usuarioRepository.save(novoUsuario);

@@ -1,8 +1,13 @@
 import { IsEmail, IsNotEmpty, MaxLength, MinLength } from "class-validator";
 import { EmailIsUnico } from "../validacoes/emailIsUnico.validator";
 import { CpfIsUnico } from "../validacoes/cpfIsUnico.validator";
+import ETipoUsuario from "src/helper/Enums/ETipoUsuario";
 
-export class CriaUsuarioDTO{
+export class CriaAdminDTO{
+
+    constructor(){
+        this.tipoUsuario = ETipoUsuario.Administrador
+    }
 
     @IsNotEmpty({message: 'O nome não pode ser vazio'})
     nome: string;
