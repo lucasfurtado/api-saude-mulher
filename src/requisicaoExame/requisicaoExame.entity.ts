@@ -22,6 +22,6 @@ export class RequisicaoExameEntity{
     @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt: string;
 
-    @ManyToOne(() => UsuarioEntity, usuario => usuario.requisicoesExame)
+    @ManyToOne(() => UsuarioEntity, usuario => usuario.requisicoesExame, { eager: true })
     usuario: UsuarioEntity
 }

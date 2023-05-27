@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, UnauthorizedException } from "@nestjs/common";
+import { Body, Controller, Get, Post, Req } from "@nestjs/common";
 import { CriarRequisicaoDTO } from "./dto/CriarRequisicao.dto";
 import { RequisicaoExameService } from "./requisicaoExame.service";
 import * as jwt from 'jsonwebtoken';
@@ -19,5 +19,10 @@ export class RequisicaoExameController{
 
         return await this.requisicaoExameService.criarRequisicaoExame(requisicaoExame, decodedToken.id);
         
+    }
+
+    @Get()
+    async obterRequisicoesExame(){
+        return await this.requisicaoExameService.obterRequisicoesExamesEnviados();
     }
 }

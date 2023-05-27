@@ -4,6 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { UsuarioEntity } from "src/usuario/usuario.entity";
 import { CriarRequisicaoDTO } from "./dto/CriarRequisicao.dto";
+import { RequisicaoExameDTO } from "./dto/requisicaoExame.dto";
 
 @Injectable()
 export class RequisicaoExameService{
@@ -21,5 +22,14 @@ export class RequisicaoExameService{
             {where: { id: usuarioId}}
         )
         await this.requisicaoExameRepository.save(novaRequisicao);
+    }
+
+    async obterRequisicoesExamesEnviados(){
+        const requiscoes = await this.requisicaoExameRepository.find(
+            {where: { Aceito: null}}
+        );
+        return requiscoes.map(
+            (requisicao) => new RequisicaoExameDTO(requisicao.id, requisicao.usuario.nome, requisicao.usuario.cpf, requisicao.HorarioConsulta)
+        )
     }
 }
