@@ -1,5 +1,7 @@
+
+import { RequisicaoExameEntity } from "src/requisicaoExame/requisicaoExame.entity";
 import { TipoUsuarioEntity } from "src/tipoUsuario/tipoUsuario.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'usuarios' })
 export class UsuarioEntity{
@@ -30,4 +32,7 @@ export class UsuarioEntity{
 
     @ManyToOne(() => TipoUsuarioEntity, tipoUsuario => tipoUsuario.usuarios, { eager: true })
     tipoUsuario: TipoUsuarioEntity;
+
+    @OneToMany(() => RequisicaoExameEntity, requisicaoExame => requisicaoExame.usuario)
+    requisicoesExame: RequisicaoExameEntity[]
 }
