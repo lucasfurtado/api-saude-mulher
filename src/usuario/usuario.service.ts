@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { CriaAdminDTO } from "./dto/criaAdministrador.dto";
 import { EditaUsuarioDTO } from "./dto/editaUsuario.dto";
-import { ListaUsuariosDTO } from "./dto/listaUsuarios.dto";
+import { UsuariosDTO } from "./dto/usuarios.dto";
 import * as bcrypt from 'bcrypt';
 import { TipoUsuarioEntity } from "src/tipoUsuario/tipoUsuario.entity";
 
@@ -18,7 +18,7 @@ export class UsuarioService{
     async listaUsuarios() {
         const usuariosSalvos = await this.usuarioRepository.find();
         return usuariosSalvos.map(
-            (usuario) => new ListaUsuariosDTO(usuario.nome,usuario.email)
+            (usuario) => new UsuariosDTO(usuario.nome,usuario.email,usuario.tipoUsuario.tipo)
         )
     }
 

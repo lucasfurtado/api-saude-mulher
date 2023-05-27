@@ -28,6 +28,6 @@ export class UsuarioEntity{
     @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt: string;
 
-    @ManyToOne(() => TipoUsuarioEntity, tipoUsuario => tipoUsuario.usuarios)
+    @ManyToOne(() => TipoUsuarioEntity, tipoUsuario => tipoUsuario.usuarios, { eager: true })
     tipoUsuario: TipoUsuarioEntity;
 }
