@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmOptionsFactory } from "@nestjs/typeorm";
 import { TypeOrmModuleOptions } from "@nestjs/typeorm/dist";
+import { RequisicaoExameEntity } from 'src/requisicaoExame/requisicaoExame.entity';
 import { TipoUsuarioEntity } from 'src/tipoUsuario/tipoUsuario.entity';
 import { UsuarioEntity } from 'src/usuario/usuario.entity';
 
@@ -18,7 +19,7 @@ export class DatabaseConfigService implements TypeOrmOptionsFactory{
             username: this.configService.get<string>('DB_USER'),
             password: this.configService.get<string>('DB_PASSWORD'),
             database: this.configService.get<string>('DB_NAME'),
-            entities: [UsuarioEntity, TipoUsuarioEntity],
+            entities: [UsuarioEntity, TipoUsuarioEntity, RequisicaoExameEntity],
             synchronize: true
         }
     }

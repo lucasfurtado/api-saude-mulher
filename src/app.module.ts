@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from './auth/auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { TipoUsuarioModule } from './tipoUsuario/tipoUsuario.module';
+import { RequisicaoExameModule } from './requisicaoExame/requisicaoExame.module';
 
 @Module({
     imports:[
@@ -15,6 +16,7 @@ import { TipoUsuarioModule } from './tipoUsuario/tipoUsuario.module';
         UsuarioModule,
         AuthModule,
         TipoUsuarioModule,
+        RequisicaoExameModule,
         ConfigModule.forRoot({
             isGlobal: true,
         }),
