@@ -5,10 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfigService } from './config/database.config.service';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { AuthGuard } from './auth/auth.guard';
-import { APP_GUARD } from '@nestjs/core';
 import { TipoUsuarioModule } from './tipoUsuario/tipoUsuario.module';
 import { RequisicaoExameModule } from './requisicaoExame/requisicaoExame.module';
+import { ExameModule } from './exame/exame.module';
 
 @Module({
     imports:[
@@ -17,6 +16,7 @@ import { RequisicaoExameModule } from './requisicaoExame/requisicaoExame.module'
         AuthModule,
         TipoUsuarioModule,
         RequisicaoExameModule,
+        ExameModule,
         ConfigModule.forRoot({
             isGlobal: true,
         }),
