@@ -36,6 +36,7 @@ lerna-debug.log*
 
 # ignore env file
 .env
+.env **
 
 # ignorar secret do token
 /src/auth/secret.ts
