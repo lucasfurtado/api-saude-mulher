@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { TipoUsuarioModule } from './tipoUsuario/tipoUsuario.module';
 import { RequisicaoExameModule } from './requisicaoExame/requisicaoExame.module';
 import { ExameModule } from './exame/exame.module';
+import { LaboratorioModule } from './laboratorio/laboratorio.module';
 
 @Module({
     imports:[
@@ -17,6 +18,7 @@ import { ExameModule } from './exame/exame.module';
         TipoUsuarioModule,
         RequisicaoExameModule,
         ExameModule,
+        LaboratorioModule,
         ConfigModule.forRoot({
             isGlobal: true,
         }),
