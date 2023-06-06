@@ -3,6 +3,7 @@ import { ConfigService } from "@nestjs/config";
 import { TypeOrmOptionsFactory } from "@nestjs/typeorm";
 import { TypeOrmModuleOptions } from "@nestjs/typeorm/dist";
 import { ExamesEntity } from 'src/exame/exame.entity';
+import { LaboratorioEntity } from 'src/laboratorio/laboratorio.entity';
 import { RequisicaoExameEntity } from 'src/requisicaoExame/requisicaoExame.entity';
 import { TipoUsuarioEntity } from 'src/tipoUsuario/tipoUsuario.entity';
 import { UsuarioEntity } from 'src/usuario/usuario.entity';
@@ -20,7 +21,7 @@ export class DatabaseConfigService implements TypeOrmOptionsFactory{
             username: this.configService.get<string>('DB_USER'),
             password: this.configService.get<string>('DB_PASSWORD'),
             database: this.configService.get<string>('DB_NAME'),
-            entities: [UsuarioEntity, TipoUsuarioEntity, RequisicaoExameEntity, ExamesEntity],
+            entities: [UsuarioEntity, TipoUsuarioEntity, RequisicaoExameEntity, ExamesEntity, LaboratorioEntity],
             synchronize: true
         }
     }
