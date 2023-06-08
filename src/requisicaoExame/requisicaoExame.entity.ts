@@ -1,3 +1,4 @@
+import { RespostaRequisicaoEntity } from "src/respostaRequisicao/respostaRequisicao.entity";
 import { UsuarioEntity } from "src/usuario/usuario.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -23,5 +24,8 @@ export class RequisicaoExameEntity{
     deletedAt: string;
 
     @ManyToOne(() => UsuarioEntity, usuario => usuario.requisicoesExame, { eager: true })
-    usuario: UsuarioEntity
+    usuario: UsuarioEntity;
+
+    @ManyToOne(() => RespostaRequisicaoEntity, respostaRequisicaoEntity => respostaRequisicaoEntity.respostasRequisicao, { eager: true })
+    respostaRequisicao: RespostaRequisicaoEntity;
 }

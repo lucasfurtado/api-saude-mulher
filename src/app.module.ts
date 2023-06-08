@@ -9,6 +9,7 @@ import { TipoUsuarioModule } from './tipoUsuario/tipoUsuario.module';
 import { RequisicaoExameModule } from './requisicaoExame/requisicaoExame.module';
 import { ExameModule } from './exame/exame.module';
 import { LaboratorioModule } from './laboratorio/laboratorio.module';
+import { RespostaRequisicaoModule } from './respostaRequisicao/respostaRequisicao.module';
 
 @Module({
     imports:[
@@ -19,6 +20,7 @@ import { LaboratorioModule } from './laboratorio/laboratorio.module';
         RequisicaoExameModule,
         ExameModule,
         LaboratorioModule,
+        RespostaRequisicaoModule,
         ConfigModule.forRoot({
             isGlobal: true,
         }),
