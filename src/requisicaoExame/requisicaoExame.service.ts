@@ -6,6 +6,7 @@ import { UsuarioEntity } from "src/usuario/usuario.entity";
 import { CriarRequisicaoDTO } from "./dto/CriarRequisicao.dto";
 import { RequisicaoExameDTO } from "./dto/requisicaoExame.dto";
 import { RespostaRequisicaoEntity } from "src/respostaRequisicao/respostaRequisicao.entity";
+import ERespostaRequisicaoExame from "src/helper/Enums/ERespostaRequisicaoExame";
 
 @Injectable()
 export class RequisicaoExameService{
@@ -29,11 +30,17 @@ export class RequisicaoExameService{
     }
 
     async obterRequisicoesExamesEnviados(){
-        // const requiscoes = await this.requisicaoExameRepository.find(
-        //     {where: { Aceito: null}}
-        // );
-        // return requiscoes.map(
-        //     (requisicao) => new RequisicaoExameDTO(requisicao.id, requisicao.usuario.nome, requisicao.usuario.cpf, requisicao.HorarioConsulta)
-        // )
+    
+        const naoRespondido = await this.respostaRequisicaoRepository.findOne(
+            {where: {id: ERespostaRequisicaoExame.NaoRespondido}}
+        );
+
+        const requisicoes = await this.requisicaoExameRepository.find(
+            {where: { respostaRequisicao: naoRespondido}}
+        );
+
+        return requisicoes.map(
+            (requisicao) => new RequisicaoExameDTO(requisicao.id, requisicao.usuario.nome, requisicao.usuario.cpf, requisicao.horarioConsulta, requisicao.respostaRequisicao.resposta)
+        )
     }
 }

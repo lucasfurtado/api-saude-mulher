@@ -22,8 +22,9 @@ export class DatabaseConfigService implements TypeOrmOptionsFactory{
             username: this.configService.get<string>('DB_USER'),
             password: this.configService.get<string>('DB_PASSWORD'),
             database: this.configService.get<string>('DB_NAME'),
+            timezone: 'America/Sao_Paulo',
             entities: [UsuarioEntity, TipoUsuarioEntity, RequisicaoExameEntity, ExamesEntity, LaboratorioEntity, RespostaRequisicaoEntity],
-            synchronize: true
+            synchronize: true,
         }
     }
 
