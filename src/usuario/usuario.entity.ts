@@ -1,4 +1,5 @@
 
+import { LaboratorioEntity } from "src/laboratorio/laboratorio.entity";
 import { RequisicaoExameEntity } from "src/requisicaoExame/requisicaoExame.entity";
 import { TipoUsuarioEntity } from "src/tipoUsuario/tipoUsuario.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
@@ -35,4 +36,7 @@ export class UsuarioEntity{
 
     @OneToMany(() => RequisicaoExameEntity, requisicaoExame => requisicaoExame.usuario)
     requisicoesExame: RequisicaoExameEntity[]
+
+    @OneToMany(() => LaboratorioEntity, laboratorio => laboratorio.usuario)
+    laboratorio: LaboratorioEntity[]
 }

@@ -3,6 +3,7 @@ export interface IDecodedToken{
     id: number,
     email: string,
     cpf: string,
+    tipousuario: string,
     iat: number,
     exp: number
 }

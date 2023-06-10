@@ -15,7 +15,6 @@ export class RequisicaoExameController{
         const authorizationHeader = request.headers['authorization'];
         const token = authorizationHeader.slice(7); // Remove o prefixo "Bearer " para obter apenas o token
         const decodedToken = jwt.decode(token) as IDecodedToken; // Decodifica o token
-        console.log(decodedToken.id);
 
         return await this.requisicaoExameService.criarRequisicaoExame(requisicaoExame, decodedToken.id);
         

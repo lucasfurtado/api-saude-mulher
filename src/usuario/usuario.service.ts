@@ -7,6 +7,8 @@ import { EditaUsuarioDTO } from "./dto/editaUsuario.dto";
 import { UsuariosDTO } from "./dto/usuarios.dto";
 import * as bcrypt from 'bcrypt';
 import { TipoUsuarioEntity } from "src/tipoUsuario/tipoUsuario.entity";
+import ETipoUsuario from "src/helper/Enums/ETipoUsuario";
+import { UsuarioLaboratorioDTO } from "./dto/usuarioLaboratorio.dto";
 
 @Injectable()
 export class UsuarioService{
@@ -60,6 +62,21 @@ export class UsuarioService{
             where: { cpf },
         });
         return possivelUsuario;
+    }
+
+    async listaLaboratorio(){
+
+        const tipoLaboratorio = await this.tipoUsuarioRepository.findOne(
+            {where: { id: ETipoUsuario.Laboratorio}}
+        );
+        
+        const laboratorios = await this.usuarioRepository.find({
+            where: { tipoUsuario: tipoLaboratorio }
+        })
+
+        return laboratorios.map(
+            (laboratorio) => new UsuarioLaboratorioDTO(laboratorio.id, laboratorio.nome, laboratorio.email, laboratorio.tipoUsuario.tipo)
+        )
     }
 
     private async encriptografarSenha(senha: string) : Promise<string>{

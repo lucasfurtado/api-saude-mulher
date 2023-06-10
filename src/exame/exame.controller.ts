@@ -11,8 +11,13 @@ export class ExameController{
         return await this.exameService.listarExames();
     }
 
-    @Post('/:id')
+    @Post('aceitar/:id')
     async marcarExame(@Param('id') id: number){
         return await this.exameService.marcarExame(id);
+    }
+
+    @Post('recusar/:id')
+    async recusarExame(@Param('id') id: number){
+        return await this.exameService.recusarExame(id);
     }
 }

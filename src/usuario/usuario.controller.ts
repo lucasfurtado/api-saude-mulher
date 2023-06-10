@@ -4,6 +4,7 @@ import { UsuarioService } from "./usuario.service";
 import { EditaUsuarioDTO } from './dto/editaUsuario.dto';
 import { CriaPacienteDTO } from './dto/criaPaciente.dto';
 import { Public } from 'src/helper/decorator.helper';
+import { CriaUsuarioLaboratorioDTO } from './dto/criaUsuarioLaboratorio.dto';
 
 @Controller('/usuarios')
 export class UsuarioController {
@@ -27,6 +28,12 @@ export class UsuarioController {
         await this.usuarioService.salvarUsuario(paciente);
     }
 
+    @Post('/laboratorio')
+    @Public()
+    async criaUsuarioLaboratorio(@Body() laboratorio: CriaUsuarioLaboratorioDTO){
+        await this.usuarioService.salvarUsuario(laboratorio);
+    }
+
     @Delete('/:id')
     async deletarUsuario(@Param('id') id: number){
         await this.usuarioService.deletarUsuario(id);
@@ -37,8 +44,14 @@ export class UsuarioController {
         await this.usuarioService.editarUsuario(id, editaUsuario);
     }
 
+    @Get('/laboratorios')
+    async listarLaboratorio(){
+        return this.usuarioService.listaLaboratorio();
+    }
+    
     @Get('/:email')
     async procuraUsuarioComEmail(@Param('email') email: string){
         return await this.usuarioService.existeComEmail(email);
     }
+
 }
