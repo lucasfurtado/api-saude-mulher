@@ -1,5 +1,6 @@
 import { ExamesEntity } from "src/exame/exame.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UsuarioEntity } from "src/usuario/usuario.entity";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: 'laboratorio' })
 export class LaboratorioEntity{
@@ -22,4 +23,7 @@ export class LaboratorioEntity{
 
     @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt: string;
+
+    @ManyToOne(() => UsuarioEntity, usuario => usuario.laboratorio, { eager: true })
+    usuario: UsuarioEntity;
 }
