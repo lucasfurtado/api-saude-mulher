@@ -24,6 +24,9 @@ export class LaboratorioEntity{
     @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt: string;
 
+    @Column({name: 'usuarioId', nullable: false})
+    usuarioId: number;
+
     @ManyToOne(() => UsuarioEntity, usuario => usuario.laboratorio, { eager: true })
     usuario: UsuarioEntity;
 }

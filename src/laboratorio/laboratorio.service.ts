@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { LaboratorioEntity } from "./laboratorio.entity";
 import { Repository } from "typeorm";
@@ -56,7 +56,18 @@ export class LaboratorioService{
         await this.exameRepository.update(exame.id, obtemExame);
     }
 
-    async listaExames(){
-        return this.laboratorioRepository.find();
+    async listaExames(usuarioId: number){
+
+        const usuario = await this.usuarioRepository.findOne(
+            {where: {id: usuarioId}}
+        )
+
+        if(usuario.tipoUsuario.id !== ETipoUsuario.Laboratorio){
+            throw new UnauthorizedException('Você não tem permissão para obter resultados de exames')
+        }
+
+        return this.laboratorioRepository.find(
+            {where: {usuarioId: usuario.id}}
+        );
     }
 }
