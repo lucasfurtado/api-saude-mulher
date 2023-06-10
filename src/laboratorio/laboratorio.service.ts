@@ -6,6 +6,7 @@ import { EnviarExameDTO } from "./dto/enviarExame.dto";
 import { ExamesEntity } from "src/exame/exame.entity";
 import { UsuarioEntity } from "src/usuario/usuario.entity";
 import ETipoUsuario from "src/helper/Enums/ETipoUsuario";
+import { ItemExameDTO } from "./dto/itemExame.dto";
 
 @Injectable()
 export class LaboratorioService{
@@ -66,8 +67,12 @@ export class LaboratorioService{
             throw new UnauthorizedException('Você não tem permissão para obter resultados de exames')
         }
 
-        return this.laboratorioRepository.find(
+        const examesFeitos = await this.laboratorioRepository.find(
             {where: {usuarioId: usuario.id}}
+        );
+
+        return examesFeitos.map(
+            (exame) => new ItemExameDTO(exame.id, exame.exame.requisicaoExame.usuario.nome, exame.resultado)
         );
     }
 }
