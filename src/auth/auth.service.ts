@@ -16,7 +16,7 @@ export class AuthService{
             throw new UnauthorizedException('Email e/ou senha inválidos, cheque as credenciais');
         }
         
-        const payload = { usuario: usuario.nome, id: usuario.id, email: usuario.email, cpf: usuario.cpf };
+        const payload = { usuario: usuario.nome, id: usuario.id, email: usuario.email, cpf: usuario.cpf, tipousuario: usuario.tipoUsuario.tipo };
 
         return {
             access_token: await this.jwtService.signAsync(payload),
