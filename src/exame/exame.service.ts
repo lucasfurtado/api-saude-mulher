@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { RequisicaoExameEntity } from 'src/requisicaoExame/requisicaoExame.entity';
 import { RespostaRequisicaoEntity } from 'src/respostaRequisicao/respostaRequisicao.entity';
 import ERespostaRequisicaoExame from 'src/helper/Enums/ERespostaRequisicaoExame';
+import { ItemExameDTO } from './dto/itemExame.dto';
 
 @Injectable()
 export class ExameService{
@@ -17,7 +18,12 @@ export class ExameService{
     ){}
 
     async listarExames(){
-        return await this.examesRepository.find();
+        const exames = await this.examesRepository.find(
+            {where: { feito: false}}
+        );
+        return exames.map(
+            (exame) => new ItemExameDTO(exame.id, exame.requisicaoExame.usuario.nome, exame.requisicaoExame.horarioConsulta, exame.requisicaoExame.respostaRequisicao.resposta)
+        )
     }
 
     async marcarExame(idRequisicaoExame: number){

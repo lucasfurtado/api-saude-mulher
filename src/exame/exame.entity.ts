@@ -19,7 +19,7 @@ export class ExamesEntity{
     @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt: string;
 
-    @OneToOne(() => RequisicaoExameEntity)
+    @OneToOne(() => RequisicaoExameEntity, { eager: true })
     @JoinColumn({ name: 'requisicao_exame_id' })
     requisicaoExame: RequisicaoExameEntity;
     
