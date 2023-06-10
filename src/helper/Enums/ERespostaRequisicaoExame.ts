@@ -3,3 +3,5 @@ enum ERespostaRequisicaoExame{
     Aceito = 2,
     Recusado = 3,
 }
+
+export default ERespostaRequisicaoExame;
