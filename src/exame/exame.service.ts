@@ -29,6 +29,12 @@ export class ExameService{
 
         if(requisicaoExame === null){
             throw new BadRequestException('Essa requisição de exame não existe.')
+        }else{
+            if(requisicaoExame.respostaRequisicao !== await this.respostaRequisicaoRepository.findOne(
+                {where: {id: ERespostaRequisicaoExame.NaoRespondido}}
+            )){
+                throw new BadRequestException('Essa requisição já foi respondida.')
+            }
         }
 
         const respondido = await this.respostaRequisicaoRepository.findOne(
@@ -41,5 +47,29 @@ export class ExameService{
         
         await this.requisicaoExameRepository.update(idRequisicaoExame,requisicaoExame);
         await this.examesRepository.save(exame);
+    }
+
+    async recusarExame(idRequisicaoExame: number){
+
+        const requisicaoExame = await this.requisicaoExameRepository.findOne(
+            {where: { id: idRequisicaoExame}}
+        );
+
+        if(requisicaoExame === null){
+            throw new BadRequestException('Essa requisição de exame não existe.')
+        }else{
+            if(requisicaoExame.respostaRequisicao !== await this.respostaRequisicaoRepository.findOne(
+                {where: {id: ERespostaRequisicaoExame.NaoRespondido}}
+            )){
+                throw new BadRequestException('Essa requisição já foi respondida.')
+            }
+        }
+
+        const respondido = await this.respostaRequisicaoRepository.findOne(
+            {where: {id: ERespostaRequisicaoExame.Recusado}}
+        );
+        requisicaoExame.respostaRequisicao = respondido;
+        
+        await this.requisicaoExameRepository.update(idRequisicaoExame,requisicaoExame);
     }
 }
