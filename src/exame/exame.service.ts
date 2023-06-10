@@ -30,10 +30,8 @@ export class ExameService{
         if(requisicaoExame === null){
             throw new BadRequestException('Essa requisição de exame não existe.')
         }else{
-            if(requisicaoExame.respostaRequisicao !== await this.respostaRequisicaoRepository.findOne(
-                {where: {id: ERespostaRequisicaoExame.NaoRespondido}}
-            )){
-                throw new BadRequestException('Essa requisição já foi respondida.')
+            if(requisicaoExame.respostaRequisicao.id !== ERespostaRequisicaoExame.NaoRespondido){
+                throw new BadRequestException('Essa requisição já foi respondida');
             }
         }
 
@@ -56,12 +54,10 @@ export class ExameService{
         );
 
         if(requisicaoExame === null){
-            throw new BadRequestException('Essa requisição de exame não existe.')
+            throw new BadRequestException('Essa requisição de exame não existe')
         }else{
-            if(requisicaoExame.respostaRequisicao !== await this.respostaRequisicaoRepository.findOne(
-                {where: {id: ERespostaRequisicaoExame.NaoRespondido}}
-            )){
-                throw new BadRequestException('Essa requisição já foi respondida.')
+            if(requisicaoExame.respostaRequisicao.id !== ERespostaRequisicaoExame.NaoRespondido){
+                throw new BadRequestException('Essa requisição já foi respondida');
             }
         }
 
