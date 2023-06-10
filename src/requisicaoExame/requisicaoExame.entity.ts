@@ -8,8 +8,8 @@ export class RequisicaoExameEntity{
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({name: 'horario_consulta', length: 255, nullable: false})
-    HorarioConsulta: string;
+    @Column({name: 'horario_consulta', type: 'datetime', nullable: false})
+    horarioConsulta: Date;
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt: string;

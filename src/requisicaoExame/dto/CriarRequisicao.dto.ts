@@ -7,7 +7,7 @@ export class CriarRequisicaoDTO{
     }
 
     @IsNotEmpty({message: 'Selecione um horário'})
-    horarioConsulta: string;
+    horarioConsulta: Date;
 
     @IsNotEmpty()
     repostaRequisicao: number

@@ -18,7 +18,7 @@ export class RequisicaoExameService{
 
     async criarRequisicaoExame(requisicaoExame: CriarRequisicaoDTO, usuarioId: number){
         const novaRequisicao = new RequisicaoExameEntity;
-        novaRequisicao.HorarioConsulta = requisicaoExame.horarioConsulta;
+        novaRequisicao.horarioConsulta = requisicaoExame.horarioConsulta;
         novaRequisicao.usuario = await this.usuarioRepository.findOne(
             {where: { id: usuarioId}}
         );
