@@ -22,7 +22,7 @@ export class ExameService{
         const requisicaoExame = await this.requisicaoExameRepository.findOne(
             {where: { id: idRequisicaoExame}}
         );
-        requisicaoExame.Aceito = true;
+        // requisicaoExame.Aceito = true;
 
         exame.feito = false;
         exame.requisicaoExame = requisicaoExame;

@@ -11,9 +11,6 @@ export class RequisicaoExameEntity{
     @Column({name: 'horario_consulta', length: 255, nullable: false})
     HorarioConsulta: string;
 
-    @Column({name: 'aceito', nullable: true})
-    Aceito: boolean;
-
     @CreateDateColumn({ name: 'created_at' })
     createdAt: string;
 
