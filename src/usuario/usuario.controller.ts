@@ -4,6 +4,7 @@ import { UsuarioService } from "./usuario.service";
 import { EditaUsuarioDTO } from './dto/editaUsuario.dto';
 import { CriaPacienteDTO } from './dto/criaPaciente.dto';
 import { Public } from 'src/helper/decorator.helper';
+import { CriaUsuarioLaboratorioDTO } from './dto/criaUsuarioLaboratorio.dto';
 
 @Controller('/usuarios')
 export class UsuarioController {
@@ -25,6 +26,12 @@ export class UsuarioController {
     @Public()
     async criarPaciente(@Body() paciente: CriaPacienteDTO){
         await this.usuarioService.salvarUsuario(paciente);
+    }
+
+    @Post('/laboratorio')
+    @Public()
+    async criaUsuarioLaboratorio(@Body() laboratorio: CriaUsuarioLaboratorioDTO){
+        await this.usuarioService.salvarUsuario(laboratorio);
     }
 
     @Delete('/:id')
