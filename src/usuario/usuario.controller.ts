@@ -44,8 +44,14 @@ export class UsuarioController {
         await this.usuarioService.editarUsuario(id, editaUsuario);
     }
 
+    @Get('/laboratorios')
+    async listarLaboratorio(){
+        return this.usuarioService.listaLaboratorio();
+    }
+    
     @Get('/:email')
     async procuraUsuarioComEmail(@Param('email') email: string){
         return await this.usuarioService.existeComEmail(email);
     }
+
 }
