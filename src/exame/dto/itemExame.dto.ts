@@ -1,4 +1,4 @@
 export class ItemExameDTO{
 
-    constructor(readonly id: number, readonly paciente: string, readonly horarioConsulta: Date, readonly status: string) {}
+    constructor(readonly codigo: number, readonly paciente: string, readonly dataConsulta: Date, readonly estadoConsulta: number) {}
 }

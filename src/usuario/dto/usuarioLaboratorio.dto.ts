@@ -1,4 +1,4 @@
 export class UsuarioLaboratorioDTO{
 
-    constructor(readonly id: number, readonly nome: string, readonly email: string, readonly perfil: string){}
+    constructor(readonly idLaboratorio: number, readonly nomeLaboratorio: string, readonly ativo: boolean = true){}
 }

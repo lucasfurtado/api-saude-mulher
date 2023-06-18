@@ -75,7 +75,7 @@ export class UsuarioService{
         })
 
         return laboratorios.map(
-            (laboratorio) => new UsuarioLaboratorioDTO(laboratorio.id, laboratorio.nome, laboratorio.email, laboratorio.tipoUsuario.tipo)
+            (laboratorio) => new UsuarioLaboratorioDTO(laboratorio.id, laboratorio.nome)
         )
     }
 

@@ -43,9 +43,8 @@ export class RequisicaoExameService{
             (requisicao) => new RequisicaoExameDTO(
                 requisicao.id, 
                 requisicao.usuario.nome, 
-                requisicao.usuario.cpf, 
                 requisicao.horarioConsulta, 
-                requisicao.respostaRequisicao.resposta
+                1
             )
         )
     }

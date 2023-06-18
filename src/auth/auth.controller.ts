@@ -12,7 +12,7 @@ export class AuthController{
     @HttpCode(HttpStatus.OK)
     @Post('login')
     async logar(@Body() credenciais: LoginDTO){
-        return await this.authService.login(credenciais.email,credenciais.senha);
+        return await this.authService.login(credenciais.email,credenciais.password);
     }
 
 }
