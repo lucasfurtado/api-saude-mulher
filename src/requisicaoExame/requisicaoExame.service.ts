@@ -40,7 +40,12 @@ export class RequisicaoExameService{
         );
 
         return requisicoes.map(
-            (requisicao) => new RequisicaoExameDTO(requisicao.id, requisicao.usuario.nome, requisicao.usuario.cpf, requisicao.horarioConsulta, requisicao.respostaRequisicao.resposta)
+            (requisicao) => new RequisicaoExameDTO(
+                requisicao.id, 
+                requisicao.usuario.nome, 
+                requisicao.horarioConsulta, 
+                1
+            )
         )
     }
 }

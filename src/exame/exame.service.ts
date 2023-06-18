@@ -22,7 +22,7 @@ export class ExameService{
             {where: { feito: false}}
         );
         return exames.map(
-            (exame) => new ItemExameDTO(exame.id, exame.requisicaoExame.usuario.nome, exame.requisicaoExame.horarioConsulta, exame.requisicaoExame.respostaRequisicao.resposta)
+            (exame) => new ItemExameDTO(exame.id, exame.requisicaoExame.usuario.nome, exame.requisicaoExame.horarioConsulta, 2)
         )
     }
 

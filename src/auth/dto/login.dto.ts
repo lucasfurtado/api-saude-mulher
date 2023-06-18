@@ -6,5 +6,5 @@ export class LoginDTO{
     email: string;
 
     @IsNotEmpty({message: 'Digite uma senha'})
-    senha: string;
+    password: string;
 }
