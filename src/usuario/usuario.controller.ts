@@ -49,9 +49,15 @@ export class UsuarioController {
         return this.usuarioService.listaLaboratorio();
     }
     
+    @Get('/paciente')
+    async listaPacientes(){
+        return await this.usuarioService.listaPaciente();
+    }
+    
     @Get('/:email')
     async procuraUsuarioComEmail(@Param('email') email: string){
         return await this.usuarioService.existeComEmail(email);
     }
+
 
 }

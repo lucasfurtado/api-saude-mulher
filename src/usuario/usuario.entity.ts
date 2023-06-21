@@ -22,6 +22,9 @@ export class UsuarioEntity{
     @Column({name: 'senha', length: 255, nullable: false})
     senha: string;
 
+    @Column({name: 'tipoUsuarioId', nullable: false})
+    usuarioId: number;
+
     @CreateDateColumn({ name: 'created_at' })
     createdAt: string;
 

@@ -9,6 +9,7 @@ import * as bcrypt from 'bcrypt';
 import { TipoUsuarioEntity } from "src/tipoUsuario/tipoUsuario.entity";
 import ETipoUsuario from "src/helper/Enums/ETipoUsuario";
 import { UsuarioLaboratorioDTO } from "./dto/usuarioLaboratorio.dto";
+import { UsuarioPacienteDTO } from "./dto/usuarioPaciente.dto";
 
 @Injectable()
 export class UsuarioService{
@@ -76,6 +77,15 @@ export class UsuarioService{
 
         return laboratorios.map(
             (laboratorio) => new UsuarioLaboratorioDTO(laboratorio.id, laboratorio.nome)
+        )
+    }
+
+    async listaPaciente(){
+        const pacientes = await this.usuarioRepository.find({
+            where: { usuarioId: ETipoUsuario.Paciente }
+        });
+        return pacientes.map(
+            (paciente) => new UsuarioPacienteDTO(paciente.id, paciente.nome, paciente.cpf, paciente.email)
         )
     }
 
