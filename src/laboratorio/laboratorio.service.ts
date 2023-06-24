@@ -7,6 +7,9 @@ import { ExamesEntity } from "src/exame/exame.entity";
 import { UsuarioEntity } from "src/usuario/usuario.entity";
 import ETipoUsuario from "src/helper/Enums/ETipoUsuario";
 import { ItemExameFeitoDTO } from "./dto/itemExameFeito.dto";
+import * as fs from 'fs';
+import * as path from 'path';
+import { IFile } from "src/helper/Interfaces/IFile.interface";
 
 @Injectable()
 export class LaboratorioService{
@@ -74,5 +77,27 @@ export class LaboratorioService{
         return examesFeitos.map(
             (exame) => new ItemExameFeitoDTO(exame.id, exame.exame.requisicaoExame.usuario.nome,exame.exame.requisicaoExame.horarioConsulta,exame.resultado)
         )
+    }
+
+    async enviarResultadoLaboratorio(id: number, file: IFile){
+
+        const pdfFileName = `${id}.pdf`
+
+        if(file.mimetype == "application/pdf"){
+            const destino = "C:\\repos\\saude-projeto\\ResultadoLaboratorio";
+            const nomeDoArquivo = pdfFileName;
+            const caminhoCompleto = path.join(destino, nomeDoArquivo);
+    
+            fs.writeFileSync(caminhoCompleto, file.buffer);
+
+            const laboratorio = await this.laboratorioRepository.findOne({where: {id:id}});
+            laboratorio.pdfName = pdfFileName;
+            this.laboratorioRepository.update(id, laboratorio);
+        }
+        else{
+            throw new BadRequestException("Tipo de arquivo não permitido");
+        }
+
+
     }
 }

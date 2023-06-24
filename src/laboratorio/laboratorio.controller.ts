@@ -1,8 +1,12 @@
-import { Body, Controller, Get, Param, Post, Req } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Req, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { LaboratorioService } from "./laboratorio.service";
 import { EnviarExameDTO } from "./dto/enviarExame.dto";
 import * as jwt from 'jsonwebtoken';
 import { IDecodedToken } from "src/helper/Interfaces/IDecodedToken.interface";
+import { FileInterceptor } from "@nestjs/platform-express";
+import * as fs from 'fs';
+import * as path from 'path';
+import { IFile } from "src/helper/Interfaces/IFile.interface";
 
 @Controller('/laboratorio')
 export class LaboratorioController{
@@ -22,5 +26,11 @@ export class LaboratorioController{
         const decodedToken = jwt.decode(token) as IDecodedToken; // Decodifica o token
 
         return this.laboratorioService.listaExames(decodedToken.id);
+    }
+
+    @Post('/enviarResultado/:id')
+    @UseInterceptors(FileInterceptor('file'))
+    enviarResultado(@Param('id') id: number, @UploadedFile() file){
+        this.laboratorioService.enviarResultadoLaboratorio(id, file as IFile);
     }
 }

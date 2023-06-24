@@ -10,6 +10,7 @@ import { RequisicaoExameModule } from './requisicaoExame/requisicaoExame.module'
 import { ExameModule } from './exame/exame.module';
 import { LaboratorioModule } from './laboratorio/laboratorio.module';
 import { RespostaRequisicaoModule } from './respostaRequisicao/respostaRequisicao.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
     imports:[
@@ -27,6 +28,9 @@ import { RespostaRequisicaoModule } from './respostaRequisicao/respostaRequisica
         TypeOrmModule.forRootAsync({
             useClass: DatabaseConfigService,
             inject: [DatabaseConfigService]
+        }),
+        MulterModule.register({
+            dest: './uploads', // Pasta de destino para salvar os arquivos
         }),
     ],
 })
