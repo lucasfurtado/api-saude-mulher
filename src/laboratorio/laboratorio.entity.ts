@@ -15,7 +15,7 @@ export class LaboratorioEntity{
     @JoinColumn({ name: 'exame_id' })
     exame: ExamesEntity;
 
-    @Column({name: 'pdf_name', length: 255, nullable: false})
+    @Column({name: 'pdf_name', length: 255, nullable: true})
     pdfName: string;
 
     @CreateDateColumn({ name: 'created_at' })

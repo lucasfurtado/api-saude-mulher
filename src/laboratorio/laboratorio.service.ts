@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { LaboratorioEntity } from "./laboratorio.entity";
-import { Not, Repository } from "typeorm";
+import { IsNull, Not, Repository } from "typeorm";
 import { EnviarExameDTO } from "./dto/enviarExame.dto";
 import { ExamesEntity } from "src/exame/exame.entity";
 import { UsuarioEntity } from "src/usuario/usuario.entity";
@@ -72,7 +72,7 @@ export class LaboratorioService{
         }
 
         let examesFeitos = await this.laboratorioRepository.find(
-            {where: {usuarioId: usuario.id, pdfName: ''}}
+            {where: {usuarioId: usuario.id, pdfName: IsNull()}}
         );
 
         return examesFeitos.map(
