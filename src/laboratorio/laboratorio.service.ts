@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { LaboratorioEntity } from "./laboratorio.entity";
-import { Repository } from "typeorm";
+import { Not, Repository } from "typeorm";
 import { EnviarExameDTO } from "./dto/enviarExame.dto";
 import { ExamesEntity } from "src/exame/exame.entity";
 import { UsuarioEntity } from "src/usuario/usuario.entity";
@@ -10,6 +10,7 @@ import { ItemExameFeitoDTO } from "./dto/itemExameFeito.dto";
 import * as fs from 'fs';
 import * as path from 'path';
 import { IFile } from "src/helper/Interfaces/IFile.interface";
+import { ItemExameResultado } from "./dto/itemExameResultado";
 
 @Injectable()
 export class LaboratorioService{
@@ -97,7 +98,14 @@ export class LaboratorioService{
         else{
             throw new BadRequestException("Tipo de arquivo não permitido");
         }
+    }
 
-
+    async obterExamesFeitos(){
+        const resultados = await this.laboratorioRepository.find(
+            {where: {pdfName: Not("")}}
+        );
+        return resultados.map(
+            (resultado) => new ItemExameResultado(resultado.id,resultado.exame.requisicaoExame.usuario.nome,resultado.exame.requisicaoExame.usuario.cpf,resultado.usuario.nome)
+        )
     }
 }

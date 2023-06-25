@@ -33,4 +33,9 @@ export class LaboratorioController{
     enviarResultado(@Param('id') id: number, @UploadedFile() file){
         this.laboratorioService.enviarResultadoLaboratorio(id, file as IFile);
     }
+
+    @Get('/examesComResultado')
+    async obterExamesComResultado(){
+        return await this.laboratorioService.obterExamesFeitos();
+    }
 }
