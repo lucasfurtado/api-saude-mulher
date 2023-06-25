@@ -81,17 +81,17 @@ export class LaboratorioService{
     }
 
     async enviarResultadoLaboratorio(id: number, file: IFile){
-
-        const pdfFileName = `${id}.pdf`
-
         if(file.mimetype == "application/pdf"){
+            const laboratorio = await this.laboratorioRepository.findOne({where: {id:id}});
+    
+            const pdfFileName = `${laboratorio.exame.id}.pdf`
+            
             const destino = "C:\\repos\\saude-projeto\\ResultadoLaboratorio";
             const nomeDoArquivo = pdfFileName;
             const caminhoCompleto = path.join(destino, nomeDoArquivo);
     
             fs.writeFileSync(caminhoCompleto, file.buffer);
 
-            const laboratorio = await this.laboratorioRepository.findOne({where: {id:id}});
             laboratorio.pdfName = pdfFileName;
             this.laboratorioRepository.update(id, laboratorio);
         }
