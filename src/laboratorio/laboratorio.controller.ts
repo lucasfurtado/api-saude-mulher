@@ -38,4 +38,9 @@ export class LaboratorioController{
     async obterExamesComResultado(){
         return await this.laboratorioService.obterExamesFeitos();
     }
+    
+    @Get('/resultado/:id')
+    async obterResultado(@Param('id') id: number){
+        return await this.laboratorioService.obterRelatorio(id);
+    }
 }

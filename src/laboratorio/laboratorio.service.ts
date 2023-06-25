@@ -72,7 +72,7 @@ export class LaboratorioService{
         }
 
         let examesFeitos = await this.laboratorioRepository.find(
-            {where: {usuarioId: usuario.id}}
+            {where: {usuarioId: usuario.id, pdfName: ''}}
         );
 
         return examesFeitos.map(
@@ -107,5 +107,25 @@ export class LaboratorioService{
         return resultados.map(
             (resultado) => new ItemExameResultado(resultado.id,resultado.exame.requisicaoExame.usuario.nome,resultado.exame.requisicaoExame.usuario.cpf,resultado.usuario.nome)
         )
+    }
+
+    async obterRelatorio(id: number){
+        const pdfPath = "C:\\repos\\saude-projeto\\ResultadoLaboratorio"
+
+        const exame = await this.laboratorioRepository.findOne({
+            where: {id: id}
+        });
+
+        const pdfname = exame.pdfName;
+
+        const fullpath = path.join(pdfPath, pdfname);
+
+        const file = fs.readFileSync(fullpath);
+
+        const base64 = file.toString('base64');
+
+        return {
+            base64: base64
+        };
     }
 }
